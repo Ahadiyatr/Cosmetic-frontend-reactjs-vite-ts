@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Category, Cosmetic } from "../types/type";
 import apiClient from "../services/apiServices";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const fetchCategories = async () => {
   const response = await apiClient.get("/categories");
@@ -116,7 +117,7 @@ export default function BrowsePage() {
               className="size-5 shrink-0"
             />
             <strong className="text-xs font-semibold leading-[18px]">
-              62821202019213
+              082251091818
             </strong>
           </div>
         </div>
@@ -210,7 +211,7 @@ export default function BrowsePage() {
           <div className="categories-cards grid grid-cols-3 gap-4">
             {categories.length > 0 ? (
               categories.map((category) => (
-                <a key={category.id} href="category.html">
+                <Link to={`/category/${category.slug}`} key={category.id}>
                   <div className="flex h-[142px] items-center justify-center rounded-3xl bg-cosmetics-greylight p-px transition-all duration-300 hover:bg-cosmetics-gradient-purple-pink hover:p-[2px]">
                     <div className="flex h-full w-full flex-col justify-center rounded-[23px] bg-white px-[10px] hover:rounded-[22px]">
                       <div className="mx-auto mb-[10px] flex size-[60px] items-center justify-center overflow-hidden rounded-full">
@@ -228,7 +229,7 @@ export default function BrowsePage() {
                       </p>
                     </div>
                   </div>
-                </a>
+                </Link>
               ))
             ) : (
               <p>belum ada data category</p>
@@ -254,10 +255,10 @@ export default function BrowsePage() {
               {popularCosmetics.length > 0 ? (
                 popularCosmetics.map((cosmetic) => (
                   <SwiperSlide
-                    key={cosmetic.id}
                     className="swiper-slide !w-fit"
+                    key={cosmetic.id}
                   >
-                    <a href="details.html">
+                    <Link to={`/cosmetic/${cosmetic.slug}`}>
                       <div className="relative flex h-[276px] w-[222px] items-center justify-center rounded-3xl transition-all duration-300 hover:bg-cosmetics-gradient-purple-pink hover:p-[2px]">
                         <div className="flex h-full flex-col justify-center gap-4 rounded-[23px] bg-white px-4 hover:rounded-[22px]">
                           <span className="absolute right-[14px] top-[14px] flex items-center justify-center gap-[2px] rounded-full bg-cosmetics-purple px-2 py-[6px]">
@@ -290,7 +291,7 @@ export default function BrowsePage() {
                           </div>
                         </div>
                       </div>
-                    </a>
+                    </Link>
                   </SwiperSlide>
                 ))
               ) : (
@@ -303,49 +304,48 @@ export default function BrowsePage() {
       <section id="FreshThisSummer">
         <div className="flex flex-col gap-4 px-5">
           <h2 className="font-bold">Fresh This Summer</h2>
+
           {allCosmetics.length > 0 ? (
             allCosmetics.map((cosmetic) => (
-              <SwiperSlide key={cosmetic.id} className="swiper-slide !w-fit">
-                <a href="details.html">
-                  <div className="flex h-[130px] items-center justify-center rounded-3xl bg-cosmetics-greylight p-px transition-all duration-300 hover:bg-cosmetics-gradient-purple-pink hover:p-[2px]">
-                    <div className="flex h-full w-full items-center gap-4 rounded-[23px] bg-white px-4 hover:rounded-[22px]">
-                      <div className="flex size-[90px] shrink-0 items-center justify-center">
-                        <img
-                          src={`${BASE_URL}/${cosmetic.thumbnail}`}
-                          alt="image"
-                          className="h-full w-full object-contain"
-                        />
-                      </div>
-                      <div className="flex w-full flex-col gap-[2px]">
-                        <h4 className="text-xs leading-[18px] text-cosmetics-purple">
-                          {cosmetic.brand.name.toUpperCase()}
-                        </h4>
-                        <h3 className="line-clamp-2 h-[48px] w-full font-semibold">
-                          {cosmetic.name}
-                        </h3>
-                        <div className="flex items-center justify-between">
-                          <strong className="font-semibold text-cosmetics-pink">
-                            {formatCurrency(cosmetic.price)}
-                          </strong>
-                          <div className="flex items-center justify-center gap-[2px]">
-                            <img
-                              src="/assets/images/icons/star.svg"
-                              alt="icon"
-                              className="size-4 shrink-0"
-                            />
-                            <p className="text-xs font-bold leading-[18px]">
-                              4.8
-                            </p>
-                          </div>
+              <Link to={`/cosmetic/${cosmetic.slug}`} key={cosmetic.id}>
+                <div className="flex h-[130px] items-center justify-center rounded-3xl bg-cosmetics-greylight p-px transition-all duration-300 hover:bg-cosmetics-gradient-purple-pink hover:p-[2px]">
+                  <div className="flex h-full w-full items-center gap-4 rounded-[23px] bg-white px-4 hover:rounded-[22px]">
+                    <div className="flex size-[90px] shrink-0 items-center justify-center">
+                      <img
+                        src={`${BASE_URL}/${cosmetic.thumbnail}`}
+                        alt="image"
+                        className="h-full w-full object-contain"
+                      />
+                    </div>
+                    <div className="flex w-full flex-col gap-[2px]">
+                      <h4 className="text-xs leading-[18px] text-cosmetics-purple">
+                        {cosmetic.brand.name.toUpperCase()}
+                      </h4>
+                      <h3 className="line-clamp-2 h-[48px] w-full font-semibold">
+                        {cosmetic.name}
+                      </h3>
+                      <div className="flex items-center justify-between">
+                        <strong className="font-semibold text-cosmetics-pink">
+                          {formatCurrency(cosmetic.price)}
+                        </strong>
+                        <div className="flex items-center justify-center gap-[2px]">
+                          <img
+                            src="/assets/images/icons/star.svg"
+                            alt="icon"
+                            className="size-4 shrink-0"
+                          />
+                          <p className="text-xs font-bold leading-[18px]">
+                            4.8
+                          </p>
                         </div>
                       </div>
                     </div>
                   </div>
-                </a>
-              </SwiperSlide>
+                </div>
+              </Link>
             ))
           ) : (
-            <p>belum ada data cosmetic popular</p>
+            <p>belum ada data cosmetic fresh</p>
           )}
         </div>
       </section>
