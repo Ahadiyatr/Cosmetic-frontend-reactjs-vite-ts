@@ -69,7 +69,7 @@ export default function CategoryPage() {
                 You deserve beauty life
               </p>
             </div>
-            <a href="my-cart.html">
+            <Link to={`/cart`}>
               <div className="flex size-[44px] shrink-0 items-center justify-center rounded-full border border-cosmetics-greylight">
                 <img
                   src="/assets/images/icons/cart.svg"
@@ -77,7 +77,7 @@ export default function CategoryPage() {
                   className="size-5 shrink-0"
                 />
               </div>
-            </a>
+            </Link>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
